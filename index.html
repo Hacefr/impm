@@ -20,81 +20,122 @@
   <!-- Dynamic Starfield Background -->
   <canvas id="starfield"></canvas>
 
-  <!-- Header -->
+  <!-- Compact Mobile Header -->
   <header>
-    <div class="main-logo">
-      <span>VS</span>
-      <svg class="bone-icon" viewBox="0 0 24 24">
-        <path d="M19.5 4.5c-1.38 0-2.5 1.12-2.5 2.5 0 .28.05.54.14.78L8.68 11.24A2.49 2.49 0 0 0 7 10.5C5.62 10.5 4.5 11.62 4.5 13s1.12 2.5 2.5 2.5c.65 0 1.24-.25 1.68-.66l8.46 3.46c-.09.24-.14.5-.14.78 0 1.38 1.12 2.5 2.5 2.5s2.5-1.12 2.5-2.5-1.12-2.5-2.5-2.5c-.28 0-.54.05-.78-.14L10.26 13.1c.09-.24.14-.5.14-.78 0-.28-.05-.54-.14-.78l8.46-3.46c.24.09.5.14.78.14 1.38 0 2.5-1.12 2.5-2.5s-1.12-2.5-2.5-2.5z"/>
-      </svg>
-      <span>IMPOSTOR</span>
+    <div class="top-brand-bar">
+      <div class="main-logo">
+        <span>VS</span>
+        <svg class="bone-icon" viewBox="0 0 24 24">
+          <path d="M19.5 4.5c-1.38 0-2.5 1.12-2.5 2.5 0 .28.05.54.14.78L8.68 11.24A2.49 2.49 0 0 0 7 10.5C5.62 10.5 4.5 11.62 4.5 13s1.12 2.5 2.5 2.5c.65 0 1.24-.25 1.68-.66l8.46 3.46c-.09.24-.14.5-.14.78 0 1.38 1.12 2.5 2.5 2.5s2.5-1.12 2.5-2.5-1.12-2.5-2.5-2.5c-.28 0-.54.05-.78-.14L10.26 13.1c.09-.24.14-.5.14-.78 0-.28-.05-.54-.14-.78l8.46-3.46c.24.09.5.14.78.14 1.38 0 2.5-1.12 2.5-2.5s-1.12-2.5-2.5-2.5z"/>
+        </svg>
+        <span>IMPOSTOR</span>
+      </div>
+      <span class="mobile-badge">MOBILE STUDIO</span>
     </div>
 
-    <!-- Top Navigation -->
-    <nav class="pill-navbar">
-      <button class="pill-btn active" id="tabBtnSkin" onclick="switchTab('skin')">
-        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 14H7v-4h6v4z"/></svg>
-        Skin
+    <!-- Scrollable Mobile Tab Bar -->
+    <nav class="mobile-nav-scroll">
+      <button class="nav-tab active" id="tabBtnStage" onclick="switchMobileTab('stage')">
+        🕹️ Stage
       </button>
-
-      <button class="pill-btn" id="tabBtnCosmic" onclick="switchTab('cosmic')">
-        <svg viewBox="0 0 24 24"><path d="M21 16.5l-9 5.2-9-5.2V7.5l9-5.2 9 5.2v9zM12 4.3L5 8.3v7.4l7 4 7-4V8.3l-7-4z"/></svg>
-        Cosmicube
+      <button class="nav-tab" id="tabBtnSlicer" onclick="switchMobileTab('slicer')">
+        🎨 Slicer
       </button>
-
-      <button class="pill-btn" id="tabBtnExport" onclick="switchTab('export')">
-        <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.49.49 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.48.48 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
-        Info
+      <button class="nav-tab" id="tabBtnTune" onclick="switchMobileTab('tune')">
+        ⚙️ Tune
       </button>
-
-      <button class="pill-btn imp-pill" onclick="saveImpProject()">
-        <svg viewBox="0 0 24 24"><path d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"/></svg>
-        Save
+      <button class="nav-tab" id="tabBtnGraphics" onclick="switchMobileTab('graphics')">
+        🖼️ Icons
       </button>
-
-      <input type="file" id="impFileInput" accept=".imp,.json" style="display:none;" onchange="loadImpProject(event)" />
-      <button class="pill-btn imp-pill" onclick="document.getElementById('impFileInput').click()">
-        <svg viewBox="0 0 24 24"><path d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z"/></svg>
-        Open
+      <button class="nav-tab" id="tabBtnCosmic" onclick="switchMobileTab('cosmic')">
+        🌌 Cosmicube
       </button>
-
-      <button class="pill-btn export-pill" onclick="bundleModZip()">
-        <svg viewBox="0 0 24 24"><path d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6 10v-2h2v-2h-2v-2h2V8h-4v8h2z"/></svg>
-        Export
+      <button class="nav-tab" id="tabBtnExport" onclick="switchMobileTab('export')">
+        📦 Export
       </button>
     </nav>
+
+    <!-- Global Character Roster Switcher (Always accessible) -->
+    <div class="roster-bar">
+      <div class="roster-tabs" id="rosterTabs"></div>
+      <button class="pill-btn mini add-char-btn" onclick="addNewCharacter()">
+        ➕ Add Character
+      </button>
+    </div>
   </header>
 
-  <!-- Main Viewport -->
-  <main class="app-viewport">
+  <!-- Mobile Viewport Container -->
+  <main class="mobile-viewport">
 
-    <!-- TAB 1: Skin Studio -->
-    <div class="tab-view active grid-skin" id="view-skin">
-      
-      <!-- Slicer Manager -->
-      <div class="panel">
-        <div class="panel-header">
-          <svg viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12z"/></svg>
-          Spritesheet Input
+    <!-- VIEW 1: STAGE SIMULATOR (Big Screen + Touch D-Pad) -->
+    <div class="mobile-view active" id="view-stage">
+      <div class="stage-hud">
+        <div style="display:flex; gap:6px; align-items:center;">
+          <label style="font-size:0.7rem; color:var(--text-dim); font-weight:800;">Stage:</label>
+          <select id="stageBgSelect" onchange="drawCharacter()">
+            <option value="mira">Mira HQ Greenhouse</option>
+            <option value="polus">Polus Snow</option>
+            <option value="airship">Airship Meeting</option>
+            <option value="defeat">Defeat Dark Mode</option>
+            <option value="clean">Minimal Grid</option>
+          </select>
+        </div>
+        <div style="font-size:0.75rem; color:var(--text-dim);">
+          Pose: <strong id="activePoseName" style="color:var(--visor-cyan);">idle</strong>
+        </div>
+      </div>
+
+      <div class="canvas-container" id="stageCanvasContainer">
+        <!-- Draggable Hat Anchor -->
+        <div class="anchor-marker anchor-hat" id="hatMarker">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm1 14H7v-4h6v4z"/></svg>
+          Hat: <span id="hatCoords">0, -90</span>
         </div>
 
+        <!-- Draggable Camera Anchor -->
+        <div class="anchor-marker anchor-cam" id="camMarker">
+          <svg viewBox="0 0 24 24"><path d="M18 10.48V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-4.48l4 3.98v-11l-4 3.5z"/></svg>
+          Cam: <span id="camCoords">100, -100</span>
+        </div>
+
+        <canvas id="charCanvas" width="460" height="420"></canvas>
+      </div>
+
+      <!-- Touch-Friendly D-Pad Controls for Thumbs -->
+      <div class="mobile-dpad">
+        <div class="dpad-cross">
+          <button class="dpad-btn up" onpointerdown="triggerMobilePose('singUP')" onpointerup="releaseMobilePose()">▲</button>
+          <button class="dpad-btn left" onpointerdown="triggerMobilePose('singLEFT')" onpointerup="releaseMobilePose()">◀</button>
+          <button class="dpad-btn down" onpointerdown="triggerMobilePose('singDOWN')" onpointerup="releaseMobilePose()">▼</button>
+          <button class="dpad-btn right" onpointerdown="triggerMobilePose('singRIGHT')" onpointerup="releaseMobilePose()">▶</button>
+        </div>
+        <button class="dpad-taunt" onpointerdown="triggerMobilePose('hey')" onpointerup="releaseMobilePose()">
+          ✌️ TAUNT
+        </button>
+      </div>
+    </div>
+
+    <!-- VIEW 2: SLICER & SPRITESHEET (Full Width) -->
+    <div class="mobile-view" id="view-slicer">
+      <div class="mobile-card">
+        <div class="panel-header">Spritesheet Source</div>
         <div class="form-group">
-          <label>Spritesheet File (.png)</label>
+          <label>Import Spritesheet PNG</label>
           <input type="file" id="spriteFileInput" accept=".png" onchange="handleSpriteUpload(event)" />
         </div>
 
         <div class="grid-2">
           <div class="form-group">
-            <label>Frame Width (px)</label>
+            <label>Cell Width (px)</label>
             <input type="number" id="frameWidthInput" value="300" oninput="updateFrameDimensions()" />
           </div>
           <div class="form-group">
-            <label>Frame Height (px)</label>
+            <label>Cell Height (px)</label>
             <input type="number" id="frameHeightInput" value="240" oninput="updateFrameDimensions()" />
           </div>
         </div>
 
-        <div class="panel-header" style="margin-top: 14px; display:flex; justify-content:space-between; align-items:center;">
+        <div class="panel-header" style="margin-top:14px; display:flex; justify-content:space-between; align-items:center;">
           <span>Animation Rows</span>
           <button class="pill-btn mini" style="background:#22c55e; border-color:#22c55e;" onclick="promptAddAnimationRow()">
             ➕ Add Row
@@ -103,7 +144,7 @@
 
         <div class="anim-rows-container" id="animRowsList"></div>
 
-        <div class="slice-preview-header" style="margin-top:14px;">
+        <div class="slice-preview-header" style="margin-top:12px;">
           <div style="display:flex; gap:6px; align-items:center;">
             <span>Slicer Map</span>
             <button class="pill-btn mini active" id="btnFitSheet" onclick="setSlicerZoom('fit')">Fit All</button>
@@ -117,99 +158,22 @@
         </div>
 
         <div class="frame-scrubber-bar">
-          <div style="display:flex; justify-content:space-between; font-size:0.68rem; color:var(--text-dim); margin-bottom:4px;">
-            <span>Scrubber:</span>
+          <div style="display:flex; justify-content:space-between; font-size:0.7rem; color:var(--text-dim); margin-bottom:4px;">
+            <span>Frame Scrubber:</span>
             <strong id="scrubberActiveTag" style="color:var(--visor-cyan);">[0: IDLE]</strong>
           </div>
           <input type="range" id="frameScrubber" min="0" max="4" value="0" step="1" oninput="scrubToFrame(this.value)" />
         </div>
-
-        <div class="panel-header" style="margin-top: 16px;">
-          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 14H7v-4h6v4z"/></svg>
-          Health Icons
-        </div>
-        
-        <button class="pill-btn mini" style="width:100%; margin-bottom:8px; justify-content:center;" onclick="autoGenerateIconsFromIdle()">
-          ⚡ Auto-Generate 3 Icons (1-Click)
-        </button>
-
-        <div class="icon-upload-grid">
-          <div class="icon-slot">
-            <label>Normal Icon</label>
-            <input type="file" id="iconNormalInput" accept=".png" onchange="handleIconUpload('normal', event)" />
-            <div class="icon-slot-status" id="iconNormalStatus">Active</div>
-          </div>
-          <div class="icon-slot">
-            <label>Lose (<20%)</label>
-            <input type="file" id="iconLoseInput" accept=".png" onchange="handleIconUpload('lose', event)" />
-            <div class="icon-slot-status" id="iconLoseStatus">Active</div>
-          </div>
-          <div class="icon-slot">
-            <label>Win (>80%)</label>
-            <input type="file" id="iconWinInput" accept=".png" onchange="handleIconUpload('win', event)" />
-            <div class="icon-slot-status" id="iconWinStatus">Active</div>
-          </div>
-        </div>
       </div>
+    </div>
 
-      <!-- Center Stage: Stage Simulator & Mobile D-Pad -->
-      <div class="stage-wrapper">
-        <div class="roster-bar">
-          <span style="font-size:0.7rem; font-weight:800; color:var(--text-dim); text-transform:uppercase;">Characters:</span>
-          <div class="roster-tabs" id="rosterTabs"></div>
-          <button class="pill-btn mini" style="background:var(--impostor-red); border-color:var(--impostor-red);" onclick="addNewCharacter()">
-            ➕ Add
-          </button>
-        </div>
-
-        <div class="stage-hud">
-          <div style="display:flex; gap:6px; align-items:center;">
-            <label style="font-size:0.68rem; color:var(--text-dim);">Stage:</label>
-            <select id="stageBgSelect" onchange="drawCharacter()" style="padding:2px 8px; font-size:0.72rem; background:#000; border:1px solid #444; color:#fff; border-radius:4px;">
-              <option value="mira">Mira HQ</option>
-              <option value="polus">Polus</option>
-              <option value="airship">Airship</option>
-              <option value="defeat">Defeat</option>
-              <option value="clean">Minimal</option>
-            </select>
-          </div>
-          <div style="font-size:0.72rem; color:var(--text-dim);">
-            Pose: <strong id="activePoseName" style="color:var(--visor-cyan);">idle</strong>
-          </div>
-        </div>
-
-        <div class="canvas-container" id="stageCanvasContainer">
-          <div class="anchor-marker anchor-hat" id="hatMarker">
-            <svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm1 14H7v-4h6v4z"/></svg>
-            Hat: <span id="hatCoords">0, -90</span>
-          </div>
-
-          <div class="anchor-marker anchor-cam" id="camMarker">
-            <svg viewBox="0 0 24 24"><path d="M18 10.48V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-4.48l4 3.98v-11l-4 3.5z"/></svg>
-            Cam: <span id="camCoords">100, -100</span>
-          </div>
-
-          <canvas id="charCanvas" width="480" height="460"></canvas>
-        </div>
-
-        <!-- NEW: On-Screen Mobile Touch D-Pad -->
-        <div class="mobile-dpad">
-          <div class="dpad-cross">
-            <button class="dpad-btn up" onpointerdown="triggerMobilePose('singUP')" onpointerup="releaseMobilePose()">▲</button>
-            <button class="dpad-btn left" onpointerdown="triggerMobilePose('singLEFT')" onpointerup="releaseMobilePose()">◀</button>
-            <button class="dpad-btn down" onpointerdown="triggerMobilePose('singDOWN')" onpointerup="releaseMobilePose()">▼</button>
-            <button class="dpad-btn right" onpointerdown="triggerMobilePose('singRIGHT')" onpointerup="releaseMobilePose()">▶</button>
-          </div>
-          <button class="dpad-taunt" onpointerdown="triggerMobilePose('hey')" onpointerup="releaseMobilePose()">✌️ TAUNT</button>
-        </div>
-      </div>
-
-      <!-- Right Panel: Calibration -->
-      <div class="panel right">
+    <!-- VIEW 3: TUNE & CALIBRATION -->
+    <div class="mobile-view" id="view-tune">
+      <div class="mobile-card">
         <div class="panel-header">Character Calibration</div>
-        
+
         <div class="form-group">
-          <label>Skin ID (Lowercase)</label>
+          <label>Skin ID (Strict Lowercase)</label>
           <input type="text" id="skinId" value="bf_star_impostor" oninput="updateCurrentCharacterProp('skinId', this.value)" />
         </div>
 
@@ -228,22 +192,23 @@
 
         <div class="grid-2">
           <div class="form-group">
-            <label>Offset X</label>
+            <label>Stage Offset X</label>
             <input type="number" id="stageOffsetX" value="0" oninput="updateCurrentCharacterProp('stageOffsetX', this.value)" />
           </div>
           <div class="form-group">
-            <label>Offset Y (Floor)</label>
+            <label>Floor Offset Y</label>
             <input type="number" id="stageOffsetY" value="400" oninput="updateCurrentCharacterProp('stageOffsetY', this.value)" />
           </div>
         </div>
 
+        <div class="panel-header" style="margin-top:14px;">Pacing & Conductor</div>
         <div class="grid-2">
           <div class="form-group">
-            <label>FPS</label>
+            <label>Animation FPS</label>
             <input type="number" id="animFps" value="24" min="6" max="60" oninput="drawCharacter()" />
           </div>
           <div class="form-group">
-            <label>Dance Beat</label>
+            <label>Dance Beat Rate</label>
             <select id="danceEverySelect">
               <option value="2">Every 2 Beats</option>
               <option value="1">Every 1 Beat</option>
@@ -264,54 +229,82 @@
         <div class="form-group">
           <label>Antialiasing</label>
           <select id="antialiasSelect" onchange="drawCharacter()">
-            <option value="true">Smooth Flash Vector</option>
-            <option value="false">Crisp Retro Pixel</option>
+            <option value="true">Smooth Flash Vector (Antialiased)</option>
+            <option value="false">Crisp Retro Pixel (No Antialiasing)</option>
           </select>
         </div>
       </div>
-
     </div>
 
-    <!-- TAB 2: Cosmicube Board -->
-    <div class="tab-view grid-cosmic" id="view-cosmic">
-      <div class="panel">
-        <div class="panel-header">Cosmicube Settings</div>
-        <div class="form-group">
-          <label>Currency Type</label>
-          <select id="currencyMode" onchange="toggleCurrency(this.value)">
-            <option value="beans">Standard Beans (In-Game Wallet)</option>
-            <option value="custom">Custom Mod Pods</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Cosmicube Title</label>
-          <input type="text" id="cubeTitle" value="Star Crewmate Cube" oninput="syncCubeTitle()" />
+    <!-- VIEW 4: ICONS & GRAPHICS -->
+    <div class="mobile-view" id="view-graphics">
+      <div class="mobile-card">
+        <div class="panel-header">Health Bar Icons</div>
+        <button class="pill-btn mini" style="width:100%; margin-bottom:10px; justify-content:center; padding:8px;" onclick="autoGenerateIconsFromIdle()">
+          ⚡ Auto-Generate 3 Icons (1-Click)
+        </button>
+
+        <div class="icon-upload-grid">
+          <div class="icon-slot">
+            <label>Normal Icon</label>
+            <input type="file" id="iconNormalInput" accept=".png" onchange="handleIconUpload('normal', event)" />
+            <div class="icon-slot-status" id="iconNormalStatus">Active</div>
+          </div>
+          <div class="icon-slot">
+            <label>Lose Icon (&lt;20%)</label>
+            <input type="file" id="iconLoseInput" accept=".png" onchange="handleIconUpload('lose', event)" />
+            <div class="icon-slot-status" id="iconLoseStatus">Active</div>
+          </div>
+          <div class="icon-slot">
+            <label>Win Icon (&gt;80%)</label>
+            <input type="file" id="iconWinInput" accept=".png" onchange="handleIconUpload('win', event)" />
+            <div class="icon-slot-status" id="iconWinStatus">Active</div>
+          </div>
         </div>
 
-        <div class="panel-header" style="margin-top:16px;">Graphics</div>
+        <div class="panel-header" style="margin-top:16px;">Cosmicube Graphics</div>
         <div class="form-group">
-          <label>Slide Banner (.png)</label>
+          <label>Carousel Slide Banner (.png)</label>
           <input type="file" id="bannerFileInput" accept=".png" onchange="handleBannerUpload(event)" />
+          <span style="font-size:0.65rem; color:var(--text-dim);">Auto-cropped to 380x210 (replaces "NO IMAGE")</span>
         </div>
         <div class="form-group">
-          <label>Node Render Portrait (.png)</label>
+          <label>Node Portrait Render (.png)</label>
           <input type="file" id="nodeRenderInput" accept=".png" onchange="handleNodeRenderUpload(event)" />
+          <span style="font-size:0.65rem; color:var(--text-dim);">Auto-cropped to 180x180 (replaces missing-texture box)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW 5: COSMICUBE BOARD -->
+    <div class="mobile-view" id="view-cosmic">
+      <div class="mobile-card" style="margin-bottom:8px;">
+        <div class="grid-2">
+          <div class="form-group" style="margin-bottom:0;">
+            <label>Cube Title</label>
+            <input type="text" id="cubeTitle" value="Star Crewmate Cube" oninput="syncCubeTitle()" />
+          </div>
+          <div class="form-group" style="margin-bottom:0;">
+            <label>Currency</label>
+            <select id="currencyMode" onchange="toggleCurrency(this.value)">
+              <option value="beans">Beans (In-Game)</option>
+              <option value="custom">Custom Pods</option>
+            </select>
+          </div>
         </div>
       </div>
 
-      <div class="cosmic-shop">
+      <div class="cosmic-shop-mobile">
         <div class="cosmic-banner">
           <div>
-            <div style="font-weight:900; font-size:1rem;" id="bannerTitle">Star Crewmate Cube</div>
-            <div style="font-size:0.65rem; color:var(--text-dim); text-transform:uppercase;">Touch Drag & Drop Node Editor</div>
+            <div style="font-weight:900; font-size:0.95rem;" id="bannerTitle">Star Crewmate Cube</div>
+            <div style="font-size:0.65rem; color:var(--text-dim); text-transform:uppercase;">Touch Drag & Drop Board</div>
           </div>
           <div style="display:flex; gap:6px; align-items:center;">
             <button class="pill-btn mini" style="background:#22c55e; border-color:#22c55e;" onclick="addNewCosmicubeNode()">
               ➕ Add Node
             </button>
-            <div class="key-badge" style="font-size:0.8rem; padding:4px 10px; border-color:var(--bean-yellow); color:var(--bean-yellow);" id="currencyBadge">
-              5,000 Beans
-            </div>
+            <div class="key-badge" id="currencyBadge">5,000 Beans</div>
           </div>
         </div>
 
@@ -321,32 +314,35 @@
         </div>
       </div>
 
-      <div class="panel right">
-        <div class="panel-header">Node Inspector</div>
-        <div class="form-group">
-          <label>Node ID</label>
-          <input type="text" id="nodeIdInput" oninput="updateSelectedNodeProp('id', this.value)" />
+      <!-- Compact Bottom Node Inspector -->
+      <div class="mobile-card" style="margin-top:8px;">
+        <div class="panel-header" style="margin-bottom:6px;">Selected Node Inspector</div>
+        <div class="grid-2">
+          <div class="form-group">
+            <label>Reward Title</label>
+            <input type="text" id="nodeNameInput" oninput="updateSelectedNodeProp('title', this.value)" />
+          </div>
+          <div class="form-group">
+            <label>Cost (Beans)</label>
+            <input type="number" id="nodeCostInput" oninput="updateSelectedNodeProp('cost', parseInt(this.value) || 0)" />
+          </div>
         </div>
-        <div class="form-group">
-          <label>Reward Title</label>
-          <input type="text" id="nodeNameInput" oninput="updateSelectedNodeProp('title', this.value)" />
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label>Type</label>
+            <select id="nodeTypeSelect" onchange="updateSelectedNodeProp('type', this.value)">
+              <option value="playerSkin">playerSkin</option>
+              <option value="pet">Pet</option>
+              <option value="hat">Cosmetic</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Assigned Character</label>
+            <select id="nodeCharSelect" onchange="updateSelectedNodeProp('charRef', this.value)"></select>
+          </div>
         </div>
-        <div class="form-group">
-          <label>Unlock Cost</label>
-          <input type="number" id="nodeCostInput" oninput="updateSelectedNodeProp('cost', parseInt(this.value) || 0)" />
-        </div>
-        <div class="form-group">
-          <label>Reward Type</label>
-          <select id="nodeTypeSelect" onchange="updateSelectedNodeProp('type', this.value)">
-            <option value="playerSkin">playerSkin (Boyfriend)</option>
-            <option value="pet">Pet</option>
-            <option value="hat">Cosmetic</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Assigned Character</label>
-          <select id="nodeCharSelect" onchange="updateSelectedNodeProp('charRef', this.value)"></select>
-        </div>
+
         <div class="grid-2">
           <div class="form-group">
             <label>Parent Node</label>
@@ -362,27 +358,39 @@
             </select>
           </div>
         </div>
-        <button class="pill-btn mini" style="background:#ef4444; border-color:#ef4444; width:100%; margin-top:10px; justify-content:center;" onclick="deleteSelectedNode()">
+
+        <button class="pill-btn mini" style="background:#ef4444; border-color:#ef4444; width:100%; margin-top:6px; justify-content:center;" onclick="deleteSelectedNode()">
           🗑️ Delete Node
         </button>
       </div>
     </div>
 
-    <!-- TAB 3: Packaging -->
-    <div class="tab-view" id="view-export" style="grid-template-columns: 1fr; padding: 16px; gap: 16px; overflow-y:auto;">
-      <div class="panel" style="border:1px solid var(--card-border); border-radius:12px;">
-        <div class="panel-header">Engine Specifications</div>
-        <div class="form-group">
-          <label>Target Engine</label>
-          <select id="engineVersion">
-            <option value="4.1.0-legacy">VS Impostor V4.1.0 Legacy (NightmareVision)</option>
-            <option value="4.0.0">VS Impostor V4.0.0 Base</option>
-          </select>
-        </div>
-        <p style="font-size: 0.8rem; color: var(--text-dim); line-height: 1.6;">
-          • Fully verified for Mobile & Desktop installations.<br>
-          • Saves & loads projects natively via <code>.imp</code> packages.
+    <!-- VIEW 6: PROJECT & EXPORT -->
+    <div class="mobile-view" id="view-export">
+      <div class="mobile-card">
+        <div class="panel-header">Project File (.imp)</div>
+        <p style="font-size:0.75rem; color:var(--text-dim); line-height:1.5; margin-bottom:10px;">
+          Save your work to your phone's downloads. You can re-open it on mobile or send it to your PC.
         </p>
+
+        <div class="grid-2">
+          <button class="pill-btn imp-pill" style="justify-content:center; padding:10px;" onclick="saveImpProject()">
+            💾 Save .imp Project
+          </button>
+          <input type="file" id="impFileInput" accept=".imp,.json" style="display:none;" onchange="loadImpProject(event)" />
+          <button class="pill-btn imp-pill" style="justify-content:center; padding:10px;" onclick="document.getElementById('impFileInput').click()">
+            📂 Open .imp File
+          </button>
+        </div>
+
+        <div class="panel-header" style="margin-top:20px;">Export Game Mod (.zip)</div>
+        <p style="font-size:0.75rem; color:var(--text-dim); line-height:1.5; margin-bottom:10px;">
+          Compiles all characters, Cosmicube nodes, slide banners, and textures into a ready-to-play mod.
+        </p>
+
+        <button class="pill-btn export-pill" style="width:100%; justify-content:center; padding:12px; font-size:0.9rem;" onclick="bundleModZip()">
+          📦 Download Mod (.ZIP)
+        </button>
       </div>
     </div>
 
