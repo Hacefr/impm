@@ -1,6 +1,6 @@
 /**
  * VS Impostor V4 Legacy - Mobile Mod Studio Engine
- * Full Touch Pointer Events, D-Pad, Multi-Character Roster, and Cosmicube Slicing.
+ * Full Touch Pointer Events, D-Pad, Multi-Character Roster, and Mobile Views.
  */
 
 // 1. GLOBAL STATE
@@ -41,8 +41,8 @@ const state = {
   activeCharIndex: 0,
 
   cosmicubeNodes: [
-    { id: 'root', title: 'Start', cost: 0, type: 'start', parent: null, direction: null, x: 140, y: 200, charRef: '' },
-    { id: 'bf_star_impostor', title: 'Star Impostor', cost: 150, type: 'playerSkin', parent: 'root', direction: 'north', x: 140, y: 80, charRef: 'bf_star_impostor' }
+    { id: 'root', title: 'Start', cost: 0, type: 'start', parent: null, direction: null, x: 140, y: 170, charRef: '' },
+    { id: 'bf_star_impostor', title: 'Star Impostor', cost: 150, type: 'playerSkin', parent: 'root', direction: 'north', x: 140, y: 50, charRef: 'bf_star_impostor' }
   ],
   selectedNodeId: 'bf_star_impostor',
   customBannerImage: null
@@ -62,7 +62,7 @@ let stars = [];
 function initStars() {
   starCanvas.width = window.innerWidth;
   starCanvas.height = window.innerHeight;
-  stars = Array.from({ length: 65 }, () => ({
+  stars = Array.from({ length: 55 }, () => ({
     x: Math.random() * starCanvas.width,
     y: Math.random() * starCanvas.height,
     size: Math.random() * 2 + 1,
@@ -89,16 +89,31 @@ function animateStarfield() {
 }
 animateStarfield();
 
-// 3. TAB NAVIGATION
-function switchTab(tabId) {
-  document.querySelectorAll('.tab-view').forEach(v => v.classList.remove('active'));
-  document.querySelectorAll('.pill-btn:not(.export-pill):not(.imp-pill)').forEach(b => b.classList.remove('active'));
-  document.getElementById('view-' + tabId).classList.add('active');
+// 3. MOBILE DEDICATED TAB SWITCHER
+function switchMobileTab(viewId) {
+  document.querySelectorAll('.mobile-view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
 
-  const tabBtn = { skin: 'tabBtnSkin', cosmic: 'tabBtnCosmic', export: 'tabBtnExport' }[tabId];
-  if (tabBtn) document.getElementById(tabBtn).classList.add('active');
+  const activeView = document.getElementById('view-' + viewId);
+  if (activeView) activeView.classList.add('active');
 
-  if (tabId === 'cosmic') {
+  const tabBtnMap = {
+    stage: 'tabBtnStage',
+    slicer: 'tabBtnSlicer',
+    tune: 'tabBtnTune',
+    graphics: 'tabBtnGraphics',
+    cosmic: 'tabBtnCosmic',
+    export: 'tabBtnExport'
+  };
+  const activeBtn = document.getElementById(tabBtnMap[viewId]);
+  if (activeBtn) activeBtn.classList.add('active');
+
+  // Trigger proper renders based on active mobile view
+  if (viewId === 'stage') {
+    drawCharacter();
+  } else if (viewId === 'slicer') {
+    updateSlicerMap();
+  } else if (viewId === 'cosmic') {
     renderDraggableNodeBoard();
   }
 }
@@ -441,6 +456,7 @@ function renderProceduralImpostor(c, bodyColor, pose) {
   c.translate(offsetX, offsetY);
   c.rotate(rot);
 
+  // Backpack on Right (+X)
   c.fillStyle = bodyColor;
   c.strokeStyle = '#000000';
   c.lineWidth = 8;
@@ -449,17 +465,20 @@ function renderProceduralImpostor(c, bodyColor, pose) {
   c.fill();
   c.stroke();
 
+  // Main Body
   c.beginPath();
   c.roundRect(-70, -200, 140, 200, [70, 70, 25, 25]);
   c.fill();
   c.stroke();
 
+  // Visor on Left (-X)
   c.fillStyle = '#7feaff';
   c.beginPath();
   c.roundRect(-60, -165, 80, 48, 24);
   c.fill();
   c.stroke();
 
+  // Visor Highlight
   c.fillStyle = '#ffffff';
   c.beginPath();
   c.roundRect(-45, -158, 50, 14, 7);
@@ -482,7 +501,7 @@ function stageAnimationLoop(time) {
 }
 requestAnimationFrame(stageAnimationLoop);
 
-// 9. MOBILE ON-SCREEN D-PAD HOOKS
+// 9. MOBILE ON-SCREEN TOUCH D-PAD HOOKS
 function triggerMobilePose(pose) {
   state.activePose = pose;
   state.isSinging = (pose !== 'idle');
@@ -634,7 +653,7 @@ async function autoGenerateIconsFromIdle() {
   alert(`Auto-Generated Icons for "${char.skinDisplayName}"!`);
 }
 
-// 11. PHYSICAL KEYBOARD LISTENER (DESKTOP)
+// 11. PHYSICAL KEYBOARD LISTENER (DESKTOP BACKWARD COMPATIBLE)
 window.addEventListener('keydown', (e) => {
   const key = e.key.toLowerCase();
   let newPose = null;
@@ -738,10 +757,10 @@ function drawNodeConnectionLines() {
       const parentNode = state.cosmicubeNodes.find(n => n.id === node.parent);
       if (parentNode) {
         const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-        line.setAttribute('x1', parentNode.x + 34);
-        line.setAttribute('y1', parentNode.y + 34);
-        line.setAttribute('x2', node.x + 34);
-        line.setAttribute('y2', node.y + 34);
+        line.setAttribute('x1', parentNode.x + 32);
+        line.setAttribute('y1', parentNode.y + 32);
+        line.setAttribute('x2', node.x + 32);
+        line.setAttribute('y2', node.y + 32);
         line.setAttribute('stroke', '#5b3a8a');
         line.setAttribute('stroke-width', '3');
         line.setAttribute('stroke-dasharray', '5 3');
@@ -771,8 +790,8 @@ function setupPointerDragNode(node, el) {
     let newX = e.clientX - startX;
     let newY = e.clientY - startY;
 
-    newX = Math.max(5, Math.min(boardRect.width - 74, newX));
-    newY = Math.max(5, Math.min(boardRect.height - 74, newY));
+    newX = Math.max(5, Math.min(boardRect.width - 70, newX));
+    newY = Math.max(5, Math.min(boardRect.height - 70, newY));
 
     node.x = Math.round(newX);
     node.y = Math.round(newY);
@@ -865,8 +884,8 @@ function addNewCosmicubeNode() {
     type: 'playerSkin',
     parent: parent,
     direction: 'north',
-    x: Math.min(300, parentNode.x + 70),
-    y: Math.max(20, parentNode.y - 30),
+    x: Math.min(260, parentNode.x + 60),
+    y: Math.max(15, parentNode.y - 25),
     charRef: ''
   };
 
@@ -1021,7 +1040,7 @@ async function generateCurrencyIconBlob() {
   return new Promise(resolve => cCanvas.toBlob(resolve, 'image/png'));
 }
 
-// 15. .IMP PROJECT ENGINE
+// 15. .IMP PROJECT SERIALIZATION (v2.1 Preserves Row-by-Row Setup)
 function imageToBase64(img) {
   if (!img) return null;
   const c = document.createElement('canvas');
@@ -1098,7 +1117,7 @@ async function loadImpProject(e) {
     try {
       const data = JSON.parse(event.target.result);
       if (data.format !== "VS_IMPOSTOR_STUDIO_PROJECT") {
-        alert("Not a valid .imp file!");
+        alert("This is not a valid VS Impostor .imp project file!");
         return;
       }
 
@@ -1154,15 +1173,15 @@ async function loadImpProject(e) {
       renderRosterTabs();
       renderAnimRowsUI();
       renderDraggableNodeBoard();
-      alert(`Loaded ${state.characters.length} character(s) from .imp!`);
+      alert(`Project (.imp) with ${state.characters.length} character(s) loaded successfully!`);
     } catch (err) {
-      alert("Error reading .imp: " + err.message);
+      alert("Error reading .imp file: " + err.message);
     }
   };
   reader.readAsText(file);
 }
 
-// 16. MULTI-DIRECTORY BUNDLER (.ZIP)
+// 16. FULL MULTI-CHARACTER & ROW-BY-ROW BUNDLER (.ZIP)
 async function bundleModZip() {
   const zip = new JSZip();
   const primaryChar = state.characters[0] || {};
@@ -1177,10 +1196,11 @@ async function bundleModZip() {
   const danceEvery = parseInt(document.getElementById('danceEverySelect').value) || 2;
   const singDuration = parseInt(document.getElementById('singDurationInput').value) || 6;
 
+  // A. Engine Metadata
   const metaData = {
     name: primaryChar.skinId,
     title: cubeTitle,
-    description: `Mod pack with ${state.characters.length} character(s) and Cosmicube.`,
+    description: `Mod pack featuring ${state.characters.length} playable character(s) and Cosmicube.`,
     author: "Impostor Modder",
     version: "1.0.0",
     mod_version: "1.0.0",
@@ -1192,6 +1212,7 @@ async function bundleModZip() {
 
   const metaString = JSON.stringify(metaData, null, 2);
 
+  // B. Cosmicube Header
   const cubeHeaderString = JSON.stringify({
     title: cubeTitle.toUpperCase(),
     currency: currencyType
@@ -1219,6 +1240,7 @@ async function bundleModZip() {
   injectTarget(zip);
   injectTarget(zip.folder(primaryChar.skinId));
 
+  // C. COMPILE EACH CHARACTER FROM ITS ANIMATION ROWS
   for (const char of state.characters) {
     const sId = char.skinId.toLowerCase().replace(/[^a-z0-9_]/g, '_');
     const scale = parseFloat(char.charScale) || 1.75;
@@ -1283,7 +1305,8 @@ async function bundleModZip() {
       spriteBlob = await new Promise(res => c.toBlob(res, 'image/png'));
     } else {
       const c = document.createElement('canvas');
-      c.width = totalW; c.height = totalH;
+      c.width = totalW;
+      c.height = totalH;
       const sCtx = c.getContext('2d');
       char.animationRows.forEach((row, rIdx) => {
         for (let f = 0; f < row.count; f++) {
@@ -1329,6 +1352,7 @@ async function bundleModZip() {
     injectChar(zip.folder(primaryChar.skinId));
   }
 
+  // D. COMPILE DRAGGABLE COSMICUBE NODES
   for (const node of state.cosmicubeNodes) {
     if (node.id === 'root') continue;
 
@@ -1360,3 +1384,4 @@ async function bundleModZip() {
 renderRosterTabs();
 selectCharacter(0);
 renderDraggableNodeBoard();
+switchMobileTab('stage');
